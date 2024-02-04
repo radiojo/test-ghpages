@@ -1,46 +1,55 @@
+# Nom de la pipeline
 name: Déploiement sur Github Pages
 
+# Quand s'exécute la pipeline
 on:
-  push:
-    branches: ["main"]
+  push: # Quand on pousse
+    branches: ["main"] #...sur la branche main
 
   workflow_dispatch:
 
+# Des histoires de permissions
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Des histoires de parallélisme de jobs
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Nos jobs !
 jobs:
   accessibilite_numerique:
     name: Vérification de l'accessibilité numérique
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Changement de branche
         uses: actions/checkout@v4
-      - name: npm install, build, and test
+      - name: Installation et exécution
         run: |
           npm ci
           npm run a11y
   deploiement:
-    needs: accessibilite_numerique
+    name: Déploiement sur Github Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # Se place dans le repo
+      - name: Changement de repo
         uses: actions/checkout@v4
-      - name: Setup Pages
+      # Configure GitHub Pages
+      - name: Configuration
         uses: actions/configure-pages@v4
-      - name: Upload artifact
+      # Permet de faire en sorte que votre site puisse être envoyé sur GitHub Pages
+      - name: Téléversement des artefacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-      - name: Deploy to GitHub Pages
+      # Déploie les fichiers sur GitHub Pages
+      - name: Déploiement vers GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
