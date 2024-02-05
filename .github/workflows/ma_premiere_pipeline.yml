@@ -32,9 +32,9 @@ jobs:
           npm ci
           npm run a11y
           echo ${{ github.event.head_commit.message }}
-          COMMIT=${{ github.event.head_commit.message }}
+          COMMIT="${{ github.event.head_commit.message }}"
           REGEXP="^(.+)(?:(([^)s]+)))?: (.+)"
-          if [[ $COMMIT =~ REGEXP ]]; then echo "yooooo"; else echo "nooooo"; fi
+          if [[ $COMMIT =~ $REGEXP ]]; then echo "yooooo"; else echo "nooooo"; fi
   deploiement:
     name: Déploiement sur Github Pages
     environment:
