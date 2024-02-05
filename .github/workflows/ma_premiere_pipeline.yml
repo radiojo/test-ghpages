@@ -31,7 +31,8 @@ jobs:
         run: |
           npm ci
           npm run a11y
-          if ! [[ github.event.head_commit.message =~ ^(.+)(?:(([^)s]+)))?: (.+) ]]; then echo "noooo"; else echo "Youhou"; fi
+          REGEXP="^(.+)(?:(([^)s]+)))?: (.+)"
+          if ! [[ github.event.head_commit.message =~ REGEXP ]]; then echo "noooo"; else echo "Youhou"; fi
   deploiement:
     name: Déploiement sur Github Pages
     environment:
