@@ -34,7 +34,7 @@ jobs:
           echo ${{ github.event.head_commit.message }}
           COMMIT="${{ github.event.head_commit.message }}"
           REGEXP="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\-\.]+\))?(!)?: ([\w ])+([\s\S]*)"
-          if ! grep -iqE "$REGEXP" "$COMMIT"; then
+          if ! [[ "$COMMIT" =~ "$REGEXP" ]]; then
             echo "nooooooo" >&2
             exit 1
           fi
