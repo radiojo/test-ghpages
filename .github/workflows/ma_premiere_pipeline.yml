@@ -31,6 +31,7 @@ jobs:
         run: |
           npm ci
           npm run a11y
+          if ! [[ $VALEUR =~ [0-9]+ ]]; then exit 1; else echo "Youhou"; fi
   deploiement:
     name: Déploiement sur Github Pages
     environment:
