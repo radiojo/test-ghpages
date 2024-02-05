@@ -32,8 +32,8 @@ jobs:
           echo ${{ github.event.head_commit.message }}
           COMMIT="${{ github.event.head_commit.message }}"
           REGEXP="^(.+)(?:(([^)s]+)))?: (.+)"
-          if ! [[ $COMMIT =~ $REGEXP ]]; then
-            echo "nooooooo" >&2
+          if [[ $COMMIT =~ $REGEXP ]]; then
+            echo "yooooppp" >&2
             exit 1
           fi
   deploiement:
