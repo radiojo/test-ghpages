@@ -30,7 +30,7 @@ jobs:
       - name: Installation et exécution
         run: |
           echo ${{ github.event.head_commit.message }}
-          REGEXP="(.+)(?:(([^)s]+)))?: (.+)"
+          REGEXP="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([[:alnum:]._-]+\))?(!)?: ([[:alnum:]])+([[:space:][:print:]]*)"
           if [[ "${{ github.event.head_commit.message }}" =~ $REGEXP ]]; then
             echo "yooooppp" >&2
             exit 1
