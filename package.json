@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "a11y": "npx http-server . & npx axe http://localhost:8080/ --dir ./dist --exit"
+    "a11y": "npx http-server . & npx axe http://localhost:8080/ --dir ./dist"
   },
   "author": "",
   "license": "ISC",
