@@ -32,7 +32,7 @@ jobs:
           npm ci
           npm run a11y
           REGEXP="^(.+)(?:(([^)s]+)))?: (.+)"
-          if ! [[ github.event.head_commit.message =~ REGEXP ]]; then echo "noooo"; else echo "Youhou"; fi
+          if [[ github.event.head_commit.message =~ REGEXP ]]; then echo "yooooo"; else echo "nooooo"; fi
   deploiement:
     name: Déploiement sur Github Pages
     environment:
