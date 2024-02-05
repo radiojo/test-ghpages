@@ -33,8 +33,11 @@ jobs:
           npm run a11y
           echo ${{ github.event.head_commit.message }}
           COMMIT="${{ github.event.head_commit.message }}"
-          REGEXP="^(.+)(?:(([^)s]+)))?: (.+)"
-          if [[ $COMMIT =~ $REGEXP ]]; then echo "yooooo"; else echo "nooooo"; fi
+          REGEXP="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\-\.]+\))?(!)?: ([\w ])+([\s\S]*)"
+          if ! grep -iqE "$REGEXP" "$COMMIT"; then
+            echo "nooooooo" >&2
+            exit 1
+          fi
   deploiement:
     name: Déploiement sur Github Pages
     environment:
